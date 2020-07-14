@@ -12,6 +12,25 @@ h1,h2{
     color: $dark;
 }
 
+h1{
+    font-size: $h1-font-size-sm;
+    @include respond(tab){
+        font-size: $h1-font-size;
+    }
+}
+h2{
+    font-size: $h2-font-size-sm;
+    @include respond(tab){
+        font-size: $h2-font-size;
+    }
+}
+h3{
+    font-size: $h3-font-size-sm;
+    @include respond(tab){
+        font-size: $h3-font-size;
+    }
+}
+
 p{
     line-height: 1.6;
 }

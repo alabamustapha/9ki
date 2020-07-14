@@ -17,9 +17,16 @@
     }
     &-energy{
         display: grid;
-        column-gap: .5rem;
-        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: .5rem;
+        grid-template-rows: 1fr 1fr 1fr;
         margin-bottom: 2rem;
+        
+        @include respond(tab){
+            column-gap: .5rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            margin-bottom: 2rem;
+            
+        }
 
         &-vert{
             grid-template-columns: 1fr;
@@ -43,7 +50,7 @@
     }
 
     &-report form{
-        width: 70%;
+        width: 100%;
         margin: 0 auto;
         display: flex;
         align-items: center;
@@ -51,8 +58,14 @@
         border: 1px solid $gray-300;
         padding-left: 1rem;
         margin-bottom: 2rem;
+        
+        @include respond(tab){
+            width: 70%;
+            
+        }
         input{
             border: 0;
+            flex: 2;
             
             &:focus{
                 outline: 0;
@@ -106,16 +119,111 @@
         }
 
         img{
-            width: 23rem;
+            width: 100%;
+            @include respond(tab){
+                width: 23rem;
+            
+            }
         }
 
         &-body{
-            height: 80vh;
+            
             width: 100%;
             position: relative;
-            display: flex;
+            display: block;
             justify-content: center;
             align-items: center;
+            position: relative;
+            padding: 2rem 0;
+            
+            @include respond(tab){
+                height: 80vh;
+                display: flex;
+                padding: 0;
+            }
+            .card{
+                border: 1px solid $gray-300;
+                border-radius: 8px;
+                padding: 1rem;
+                margin-bottom: 1rem;
+                // position: relative;
+                // width: 100%;
+                
+                @include respond(tab){
+                    width: 10rem;
+                    position: absolute;
+                }
+
+
+                .item{
+                    display: flex;
+                    align-items: flex-end;
+                    margin-bottom: 1rem;
+                    span{
+                        line-height: 1;
+                    }
+
+                    .name{
+                        display: inline-block;
+                        margin-right: 1rem;
+                    }
+
+                    .empty{
+                        display: inline-block;
+                        height: 1px;
+                        width: 12px;
+                        background-color: $gray-700;
+                    }
+                }
+
+                &-fire{
+                    border: 1px solid #F41B2E;
+                    
+                    @include respond(tab){
+                        top: 1rem;
+                        left: 41%;
+                        border: 1px solid $gray-300;
+                    }
+                }
+                
+                &-water{
+                    border: 1px solid #000;
+                    @include respond(tab){
+                        bottom: 8rem;
+                        left: 5rem;
+                        border: 1px solid $gray-300;
+
+                    }
+                }
+                &-earth{
+                    border: 1px solid #FFC90C;
+                    @include respond(tab){
+                        top:13rem;
+                        right: 4rem;
+                        border: 1px solid $gray-300;
+            
+                    }
+                }
+                
+                &-metal{
+                    border: 1px solid #6E6F71;
+                    @include respond(tab){
+                        bottom: 8rem;
+                        right: 5rem;
+                        border: 1px solid $gray-300;
+            
+                    }
+                }
+                &-wood{
+                    border: 1px solid #94C83F;
+                    @include respond(tab){
+                        top: 13rem;
+                        left: 4rem;
+                        border: 1px solid $gray-300;
+            
+                    }
+                }
+            }
         }
 
         .buttons{

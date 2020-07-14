@@ -3,3 +3,11 @@
         color: $gray-700;
     }
 }
+
+.form-area{
+    padding-left: 0;
+
+    @include respond(tab){
+        padding-left: 3rem;
+    }
+}

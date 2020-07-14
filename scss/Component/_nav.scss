@@ -1,0 +1,16 @@
+.navbar{
+    padding: 1.5rem;
+    @include respond(tab){
+        padding: 1.5rem 0;
+    }
+
+
+    &-collapse{
+        padding: 2rem 0;
+        
+
+        @include respond(tab){
+            padding: 0;
+        }
+    }
+}
