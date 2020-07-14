@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Custom css -->
     <link rel="stylesheet" href="assets/css/starter.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 
     <title>9ki home!</title>
   </head>
@@ -83,23 +85,26 @@
                                     <form action="">
                                         <div class="form-group">
                                             <label for="name">Provide your name</label>
-                                            <input type="text" class="form-control" name="name" >
+                                            <input type="text" class="form-control" v-model="name" >
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" name="email">
+                                            <input type="text" class="form-control" v-model="email">
                                         </div>
                                         <div class="form-group">
                                             <label for="dob">Date of birth(YYYY-MM-DD)</label>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" name="year" class="form-control" placeholder="Year">
+                                                    <input type="text" v-model="year" class="form-control" placeholder="Year">
+                                                    <div>
+                                                        {{ yEnergy }}
+                                                    </div>
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" name="month" class="form-control" placeholder="Month">
+                                                    <input type="text" v-model="month" class="form-control" placeholder="Month">
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" name="day" class="form-control" placeholder="Day">
+                                                    <input type="text" v-model="day" class="form-control" placeholder="Day">
                                                 </div>
                                             </div>
                                         </div>
@@ -126,8 +131,8 @@
                                                     <h4 class="result-heading">Success</h4>
                                                     
                                                     <div class="result-personal-info">
-                                                        <span class="name">Scott Gilbert</span>
-                                                        <span class="date">2013-09-19</span>
+                                                        <span class="name">{{ name }}</span>
+                                                        <span class="date">{{ dateOfBirth }}</span>
                                                     </div>
 
                                                     <div class="result-energy">
@@ -138,7 +143,7 @@
 
                                                     <div class="result-report">
                                                         <form action="">
-                                                            <input type="email" name="email" id="email" value="scottgilbert@gmail.com">
+                                                            <input type="email" name="email" id="email" :value="email">
                                                             <button type="submit" class="btn btn-report btn-secondary">Submit</button>
                                                         </form>
                                                     </div>
@@ -282,7 +287,32 @@
     <!-- Optional JavaScript -->
     <script src="assets/js/starter.js"></script>
 
+    <script>
+        var app = new Vue({
+        el: '#app',
+        data: {
+         name: '',
+         email: '',
+         year: '',
+         month: '',
+         day: '',
+        }, 
+        computed: {
+            dateOfBirth(){
+                return this.year + "-" + this.month + "-" + this.day;
+            },
 
+            yEnergy(){
+                energies = [1,9,8,7,6,5,4,3,2];
+                return   energies[((this.energyYear - 1900) % 9)];
+            },
+
+            energyYear(){
+                return this.month <= 2 && this.day <= 3 ? this.year - 1 : this.year; 
+            }
+        }
+    })
+    </script>
 
   </body>
 </html>
