@@ -285,15 +285,12 @@
     <script src="assets/js/starter.js"></script>
 
     <script>
+
         var app = new Vue({
         el: '#app',
         data: {
-         childEnergyTable: [
-             [8,7,6,5,4,3,2,1,9,8,7,6], // 1,4,7
-             [5,1,9,8,7,6,5,4,3,2,1,9], // 2,5,8
-             [2,4,3,2,1,9,8,7,6,5,4,3]  // 3,6,9
-         ],
-         resolutionEnergyTable: ["445", "499", "421", "941", "995", "928", "248", "297", "225", "436", "454", "472", "937", "959", "977", "234", "252", "279", "481", "418", "463", "986", "914", "966", "288", "216", "261", "344", "398", "326", "546", "591", "528", "748", "753", "721", "335", "353", "371", "537", "555", "573", "739", "757", "775", "389", "317", "362", "582", "519", "568", "784", "712", "766", "849", "894", "822", "142", "196", "124", "647", "692", "629", "831", "858", "876", "133", "151", "178", "638", "656", "674", "885", "813", "867", "187", "115", "169", "683", "611", "665"],    
+         childEnergyTable: childEnergyTable,
+         resolutionEnergyTable: resolutionEnergyTable,
          name: '',
          email: '',
          input_year: null,
@@ -312,12 +309,15 @@
             year(){
                 return parseInt(this.input_year);
             },
+          
             month(){
                 return parseInt(this.input_month);
             },
+          
             day(){
                 return parseInt(this.input_day);
             },
+          
             dateOfBirth(){
                 return this.year + "-" + this.month + "-" + this.day;
             },
@@ -329,7 +329,6 @@
 
             energyYear(){
                 return (this.month < 2 || (this.month == 2 && this.day <= 3)) ? this.year - 1 : this.year; 
-
             },
 
             childEnergy(){
@@ -339,7 +338,7 @@
                 else if(this.adultEnergy == 2 || this.adultEnergy == 5 || this.adultEnergy == 8)
                     energy = this.childEnergyTable[1][this.monthIndex - 1];
                 else if(this.adultEnergy == 3 || this.adultEnergy == 6 || this.adultEnergy == 9)    
-                    energy = this.childEnergyTable[1][this.monthIndex - 1];
+                    energy = this.childEnergyTable[2][this.monthIndex - 1];
                 return energy;
             },
 
@@ -356,10 +355,8 @@
                 return result;
             },
             
-            resolutionEnergyHelper(){
-                
+            resolutionEnergyHelper(){          
                 return `${this.adultEnergy}${this.childEnergy}`;
-            
             },
 
             monthIndex(){

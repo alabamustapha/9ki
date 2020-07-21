@@ -9,6 +9,8 @@
 
     <!-- Custom css -->
     <link rel="stylesheet" href="assets/css/starter.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 
     <title>Get group dynamics</title>
   </head>
@@ -87,23 +89,23 @@
                                     <form action="">
                                         <div class="form-group">
                                             <label for="name">Provide your name</label>
-                                            <input type="text" class="form-control" name="name" >
+                                            <input type="text" class="form-control" name="name" v-model="name" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" name="email">
+                                            <input type="text" class="form-control" name="email" v-model="email">
                                         </div>
                                         <div class="form-group">
                                             <label for="dob">Date of birth(YYYY-MM-DD)</label>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" name="year" class="form-control" placeholder="Year">
+                                                    <input type="text" name="year" class="form-control" placeholder="Year" v-model="input_year" required>
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" name="month" class="form-control" placeholder="Month">
+                                                    <input type="text" name="month" class="form-control" placeholder="Month" v-model="input_month" required>
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" name="day" class="form-control" placeholder="Day">
+                                                    <input type="text" name="day" class="form-control" placeholder="Day" v-model="input_day" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,8 +115,8 @@
                                             <span>Information collected here is never saved.</span>
                                         </div>
 
-                                        <button class="btn btn-outline-secondary mr-3" type="button" >Add</button>
-                                        <button type="reset" class="btn btn-light">cancel</button>
+                                        <button class="btn btn-outline-secondary mr-3" type="button" @click.prevent="addMember"  :disabled="!isValid">Add</button>
+                                        <button type="reset" class="btn btn-light" @click.prevent="clearForm">cancel</button>
                                     </form>
 
 
@@ -126,24 +128,24 @@
                                             <div class="modal-content">
                                                 
                                             <div class="owl-carousel owl-theme">
-                                                <div class="modal-body">
+                                                <div class="modal-body" v-for="(member, index) in members" :key="index">
                                                     <div class="result">
                                                         <h4 class="result-heading">Success</h4>
                                                         
                                                         <div class="result-personal-info">
-                                                            <span class="name">Scott Gilbert</span>
-                                                            <span class="date">2013-09-19</span>
+                                                            <span class="name">{{member.name }}</span>
+                                                            <span class="date">{{member.year}}-{{member.month}}-{{member.day}}</span>
                                                         </div>
     
                                                         <div class="result-energy">
-                                                            <span class="result-energy-item">Adult energy: 5</span>
-                                                            <span class="result-energy-item">Child energy: 7</span>
-                                                            <span class="result-energy-item">Resolution energy: 1</span>
+                                                            <span class="result-energy-item">Adult energy: {{ memberAdultEnergy(member) }}</span>
+                                                            <span class="result-energy-item">Child energy: {{ memberChildEnergy(member) }}</span>
+                                                            <span class="result-energy-item">Resolution energy: {{ memberResolutionEnergy(member) }}</span>
                                                         </div>
     
                                                         <div class="result-report">
                                                             <form action="">
-                                                                <input type="email" name="email" id="email" value="scottgilbert@gmail.com">
+                                                                <input type="email" name="email" id="email" v-model="member.email">
                                                                 <button type="submit" class="btn btn-report btn-secondary">Submit</button>
                                                             </form>
                                                         </div>
@@ -154,62 +156,7 @@
                                                     </div>
                                                     
                                                 </div>
-                                                <div class="modal-body">
-                                                    <div class="result">
-                                                        <h4 class="result-heading">Success</h4>
-                                                        
-                                                        <div class="result-personal-info">
-                                                            <span class="name">Scott Gilbert</span>
-                                                            <span class="date">2013-09-19</span>
-                                                        </div>
-    
-                                                        <div class="result-energy">
-                                                            <span class="result-energy-item">Adult energy: 5</span>
-                                                            <span class="result-energy-item">Child energy: 7</span>
-                                                            <span class="result-energy-item">Resolution energy: 1</span>
-                                                        </div>
-    
-                                                        <div class="result-report">
-                                                            <form action="">
-                                                                <input type="email" name="email" id="email" value="scottgilbert@gmail.com">
-                                                                <button type="submit" class="btn btn-report btn-secondary">Submit</button>
-                                                            </form>
-                                                        </div>
-                                                        <div class="text-center">
-    
-                                                            <button class="btn btn-primary">Continue</button>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="result">
-                                                        <h4 class="result-heading">Success</h4>
-                                                        
-                                                        <div class="result-personal-info">
-                                                            <span class="name">Scott Gilbert</span>
-                                                            <span class="date">2013-09-19</span>
-                                                        </div>
-    
-                                                        <div class="result-energy">
-                                                            <span class="result-energy-item">Adult energy: 5</span>
-                                                            <span class="result-energy-item">Child energy: 7</span>
-                                                            <span class="result-energy-item">Resolution energy: 1</span>
-                                                        </div>
-    
-                                                        <div class="result-report">
-                                                            <form action="">
-                                                                <input type="email" name="email" id="email" value="scottgilbert@gmail.com">
-                                                                <button type="submit" class="btn btn-report btn-secondary">Submit</button>
-                                                            </form>
-                                                        </div>
-                                                        <div class="text-center">
-    
-                                                            <button class="btn btn-primary">Continue</button>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
+                                               
                                                 
                                               </div>
                                             </div>
@@ -227,13 +174,14 @@
                                     <div class="card mb-4">
                                         <div class="card-body">
                                             <div class="group-card">
-                                                <h5 class="subtitle text-secondary">Group (3 members)</h5>
+                                                <h5 class="subtitle text-secondary">Group ({{ members.length}} members)</h5>
                                                 
-                                                <div class="group-card-list">
-                                                   <span class="name">Esther Robertson</span>
-                                                   <span class="date">2013-09-19</span>
+                                                <span v-if="!members.length">Start by adding a member</span>
+                                                <div class="group-card-list" v-for="(member, index) in members" :key="index">
+                                                   <span class="name">{{ member.name }}</span>
+                                                   <span class="date">{{ `${member.year}-${member.month}-${member.day}` }}</span>
 
-                                                   <span class="close">&times;</span>
+                                                   <span class="close" @click="removeMember(index)">&times;</span>
                                                 </div>
 
                                             </div>
@@ -592,7 +540,9 @@
 			<img src="assets/img/logo.png" alt="logo">
 			<p>copyright &copy; 2020 
 			</p>
-		</footer>
+        </footer>
+        
+       
 	</div>
 
     
@@ -602,6 +552,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="/node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
+    
 
     
     <!-- Optional JavaScript -->
@@ -624,6 +575,168 @@
             1000:{
                 items:1
             }
+        }
+    })
+    </script>
+
+
+    <script>
+        
+        var app = new Vue({
+        el: '#app',
+        data: {
+         childEnergyTable: childEnergyTable,
+         resolutionEnergyTable: resolutionEnergyTable,
+         name: '',
+         email: '',
+         input_year: null,
+         input_month: null,
+         input_day: null,
+         members: [
+             {name: "Mustapha Alaba", year: "1993", month: "01", day: "29", email: "alabamustapha@gmail.com"},
+             {name: "Mustapha Alaba", year: "1993", month: "01", day: "29", email: "alabamustapha@gmail.com"},
+             {name: "Mustapha Alaba", year: "1993", month: "01", day: "29", email: "alabamustapha@gmail.com"},
+        ],
+        }, 
+        methods:{
+
+            clearForm(){
+                this.name = '';
+                this.email = '';
+                this.input_year = null;
+                this.input_month = null;
+                this.input_day = null;
+            },
+
+            dateIsBetween(member, from, to){ //[month,day]
+                let from_date = new Date(member.year, parseInt(from[0])-1, from[1]);  // -1 because months are from 0 to 11
+                let to_date   = new Date(member.year, parseInt(to[0])-1, to[1]);
+                let check_date = new Date(member.year, parseInt(member.month)-1, member.day);
+                return check_date >= from_date && check_date <= to_date;
+            },
+
+            memberMonthIndex(member){
+                let index = 0;
+                if(this.dateIsBetween(member, [2, 4], [3,5])) //[month, day] 4th feb - 5th march
+                    index = 1;
+                else if(this.dateIsBetween(member, [3, 6], [4,5])) // 6th march - 5th april
+                    index = 2;    
+                else if(this.dateIsBetween(member, [4, 6], [5,5])) // 6th April - 5th May
+                    index = 3;    
+                else if(this.dateIsBetween(member, [5, 6], [6,5])) // 6th May - 5th June 
+                    index = 4;    
+                else if(this.dateIsBetween(member, [6, 6], [7,7])) // 6 June - 7 July 
+                    index = 5;    
+                else if(this.dateIsBetween(member, [8, 7], [8,7])) // 8 July to 7 August 
+                    index = 6;    
+                else if(this.dateIsBetween(member, [8, 8], [9,8])) // 8 August - 7 September 
+                    index = 7;    
+                else if(this.dateIsBetween(member, [9, 8], [10,8])) // 8 September - 8 October 
+                    index = 8;    
+                else if(this.dateIsBetween(member, [9, 10], [11,7])) // 9 October to 7 November 
+                    index = 9;    
+                else if(this.dateIsBetween(member, [11, 8], [12,7])) // 8 November to 7 December
+                    index = 10;    
+                else if(this.dateIsBetween(member, [12, 8], [1,5])) // 8 December to 5 January 
+                    index = 11;    
+                else if(this.dateIsBetween(member, [1, 6], [2,5])) // 6 January to 5 February 
+                    index = 12;
+                else
+                    console.log("Oops, something went wrong getting monthindex");
+                return index;    
+            },
+
+            removeMember(member_index){
+                this.members = this.members.filter(function(member, index){
+                    return index !== member_index;
+                })
+            },
+
+            memberEnergyYear(member){
+                return (member.month < 2 || (member.month == 2 && member.day <= 3)) ? member.year - 1 : member.year; 
+            },
+
+            memberAdultEnergy(member){
+                energies = [1,9,8,7,6,5,4,3,2];
+                return   energies[((this.memberEnergyYear(member) - 1900) % 9)];
+            },
+
+            memberChildEnergy(member){
+                energy = -1;
+                console.log(this.dateIsBetween(1993,[1, 6], [2,5]));
+                console.log(this.memberMonthIndex(member));
+                if(this.memberAdultEnergy(member) == 1 || this.memberAdultEnergy(member) == 4 || this.memberAdultEnergy(member) == 7)
+                    energy = this.childEnergyTable[0][this.memberMonthIndex(member) - 1];
+                else if(this.memberAdultEnergy(member) == 2 || this.memberAdultEnergy(member) == 5 || this.memberAdultEnergy(member) == 8)
+                    energy = this.childEnergyTable[1][this.memberMonthIndex(member) - 1];
+                else if(this.memberAdultEnergy(member) == 3 || this.memberAdultEnergy(member) == 6 || this.memberAdultEnergy(member) == 9)    
+                    energy = this.childEnergyTable[2][this.memberMonthIndex(member) - 1];
+                return energy;
+            },
+
+            resolutionEnergyHelper(member){          
+                return `${this.memberAdultEnergy(member)}${this.memberChildEnergy(member)}`;
+            },
+            
+            memberResolutionEnergy(member){
+                let result = "";
+                console.log(`${this.memberAdultEnergy(member)}${this.memberChildEnergy(member)}`);
+                if(!isNaN(this.memberAdultEnergy(member)) && !isNaN(this.memberChildEnergy(member))){
+                    result = this.resolutionEnergyTable.filter(energy => energy.startsWith(this.resolutionEnergyHelper(member)));
+                }
+                
+                if(Array.isArray(result)){
+                    result =  result[0].split("").pop();
+                }
+                return result;
+            },
+
+
+            addMember(){
+
+                this.members.push({name: this.name, year: this.year, month: this.month , day: this.day, email: this.email });
+                this.clearForm();           
+            }
+        },
+        computed: {
+            year(){
+                return parseInt(this.input_year);
+            },
+          
+            month(){
+                return isNaN(parseInt(this.input_month)) ? 0 : parseInt(this.input_month);
+            },
+          
+            day(){
+                return parseInt(this.input_day);
+            },
+          
+            dateOfBirth(){
+                return this.year + "-" + this.month + "-" + this.day;
+            },
+            
+            isValid(member){
+                
+                return this.nameIsValid && this.yearIsValid && this.monthIsValid && this.dayIsValid;
+            },
+
+            nameIsValid(){
+                return this.name && this.name.length > 0;
+            },
+            
+            yearIsValid(){
+                return this.input_year.length == 4 && /[1-9]{1}[0-9]{3}/.test(this.input_year);
+            },
+
+            monthIsValid(){
+                return this.month && this.month > 0 && this.month <= 12;
+            },
+            
+            dayIsValid(){
+                let datee = new Date(this.year, this.month - 1, this.day); 
+                return datee.getDate() == this.day && datee.getMonth() == this.month - 1 && datee.getFullYear() == this.year;
+            }
+
         }
     })
     </script>
