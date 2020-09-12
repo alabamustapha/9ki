@@ -89,7 +89,7 @@
                                     <form action="">
                                         <div class="form-group">
                                             <label for="name">Provide your name</label>
-                                            <input type="text" class="form-control" name="name" v-model="name" required>
+                                            <input type="text" class="form-control" name="name" v-model="name">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
@@ -99,13 +99,13 @@
                                             <label for="dob">Date of birth(YYYY-MM-DD)</label>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" name="year" class="form-control" placeholder="Year" v-model="input_year" required>
+                                                    <input type="text" name="year" class="form-control" placeholder="Year" v-model="input_year">
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" name="month" class="form-control" placeholder="Month" v-model="input_month" required>
+                                                    <input type="text" name="month" class="form-control" placeholder="Month" v-model="input_month">
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" name="day" class="form-control" placeholder="Day" v-model="input_day" required>
+                                                    <input type="text" name="day" class="form-control" placeholder="Day" v-model="input_day">
                                                 </div>
                                             </div>
                                         </div>
@@ -627,7 +627,7 @@
                     index = 4;    
                 else if(this.dateIsBetween(member, [6, 6], [7,7])) // 6 June - 7 July 
                     index = 5;    
-                else if(this.dateIsBetween(member, [8, 7], [8,7])) // 8 July to 7 August 
+                else if(this.dateIsBetween(member, [7, 8], [8,7])) // 8 July to 7 August 
                     index = 6;    
                 else if(this.dateIsBetween(member, [8, 8], [9,8])) // 8 August - 7 September 
                     index = 7;    
